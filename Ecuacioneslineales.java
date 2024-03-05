@@ -11,7 +11,8 @@ public class Ecuacioneslineales {
             System.out.println("2). Resta");
             System.out.println("3). Multiplicaion");
             System.out.println("4). Division");
-            System.out.println("5). salir");
+            System.out.println("5). Cuadraticas");
+            System.out.println("6). salir");
             System.out.print("Seleccione una opción: ");
 
             menu = scanner.nextInt();
@@ -28,18 +29,53 @@ public class Ecuacioneslineales {
                     multiplicacion(scanner);
                     break;
                 case 4:
-                    Division(scanner);
+                    division(scanner);
                     break;
                 case 5:
+                    cuadraticas(scanner);
+                    break;
+                case 6:
                     System.out.println("¡Hasta luego!");
                     break;
                 default:
                     System.out.println("Opción no válida. Numero indefinido,inténtelo de nuevo.");
             }
 
-        } while (menu != 5);
+        } while (menu != 6);
 
         scanner.close();
+    }
+
+    private static void cuadraticas(Scanner scanner) {
+        System.out.println("Ingrese los coeficientes de la ecuación cuadrática (a, b, c):");
+        System.out.print("a = ");
+        double a = scanner.nextDouble();
+
+        System.out.print("b = ");
+        double b = scanner.nextDouble();
+
+        System.out.print("c = ");
+        double c = scanner.nextDouble();
+        double discriminante = (b * b) - (4 * a * c);
+        if (discriminante > 0) {
+            double raiz1 = (-b + Math.sqrt(discriminante)) / (2 * a);
+            double raiz2 = (-b - Math.sqrt(discriminante)) / (2 * a);
+            System.out.println("Las raíces son reales y diferentes:");
+            System.out.println("Raíz 1 = " + raiz1);
+            System.out.println("Raíz 2 = " + raiz2);
+        } else if (discriminante == 0) {
+            double raiz = -b / (2 * a);
+            System.out.println("La ecuación tiene una raíz real y doble:");
+            System.out.println("Raíz = " + raiz);
+        } else {
+            System.out.println("Las raíces son números complejos:");
+            double parteReal = -b / (2 * a);
+            double parteImaginaria = Math.sqrt(Math.abs(discriminante)) / (2 * a);
+            System.out.println("Raíz 1 = " + parteReal + " + " + parteImaginaria + "i");
+            System.out.println("Raíz 2 = " + parteReal + " - " + parteImaginaria + "i");
+        }
+
+
     }
 
     private static void multiplicacion(Scanner scanner) {
@@ -77,7 +113,7 @@ public class Ecuacioneslineales {
         System.out.print("Su resultado es: " + sumar);
     }
 
-    private static void Division(Scanner scanner) {
+    private static void division(Scanner scanner) {
 
         System.out.print("Primer digito a dividir: ");
         int primerDigito = scanner.nextInt();
